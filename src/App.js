@@ -8,10 +8,10 @@ function App() {
   const routes = useRoutes(router)
   return (
     <>
-      <div class="container px-0">
+      <div className="container px-0">
         <Header />
-        <main class="main">
-          <div class="row justify-content-between mx-0">
+        <main className="main">
+          <div className="row justify-content-between mx-0">
             <Sidebar />
             {routes}
           </div>
