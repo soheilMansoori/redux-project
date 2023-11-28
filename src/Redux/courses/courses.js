@@ -16,15 +16,19 @@ export const getAllCoursesFromServer = createAsyncThunk(
 const slice = createSlice({
     name: 'Courses',
     initialState: [],
+
     reducers: {
 
     },
+
     extraReducers: (builder) => {
         builder.addCase(getAllCoursesFromServer.fulfilled, (state, action) => {
             console.log('state => ', state);
             console.log('action => ', action);
         })
     }
+
+
 })
 
 console.log(slice);
