@@ -1,6 +1,6 @@
-import Articles from '../Pages/Articles';
-import Courses from '../Pages/Courses'
-import Infos from '../Pages/Infos'
+import Articles from '../Pages/Articles/Articles';
+import Courses from '../Pages/Courses/Courses'
+import Infos from '../Pages/Infos/Infos'
 import Users from '../Pages/Users/Users'
 
 const router = [
