@@ -1,39 +1,12 @@
 import React from "react";
 import "./Users.css";
+import TabMenu from "../../Components/TabMenu/TabMenu";
 
 export default function Users() {
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper">
-        <ul className="content__tabs">
-          <li className="content__tab">
-            <a href="users-admin.html" className="content__tab-link">
-              <span className="fa fa-user"></span>
-              کاربران
-            </a>
-          </li>
-          <li className="content__tab">
-            <a href="infomation-admin.html" className="content__tab-link">
-              <span className="fa fa-book"></span>
-              اطلاعات
-            </a>
-          </li>
-          <li className="content__tab">
-            <a href="products-admin.html" className="content__tab-link">
-              <span className="fa fa-store"></span>
-              دوره‌ها
-            </a>
-          </li>
-
-          <li className="content__tab">
-            <a href="weblog-admin.html" className="content__tab-link">
-              <span className="fa fa-newspaper"></span>
-              وبلاگ
-            </a>
-          </li>
-        </ul>
-        <div className="active"></div>
-
+        <TabMenu />
         <div className="users">
           <form action="#" className="form row justify-content-between gap-3 mx-0">
             <div className="form__box-input col-8 px-0">

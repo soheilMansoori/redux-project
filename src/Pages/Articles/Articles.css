@@ -1,12 +1,3 @@
-.active {
-    width: 12rem;
-    height: 2px;
-    background-color: var(--blue);
-    position: absolute;
-    top: 6.5rem;
-    right: 41%;
-}
-
 .articles__tag-text {
     font-size: 1.2rem;
 }

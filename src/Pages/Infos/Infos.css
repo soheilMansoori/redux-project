@@ -71,15 +71,6 @@
 
 /* upload input */
 
-.active {
-    width: 12rem;
-    height: 2px;
-    background-color: var(--blue);
-    position: absolute;
-    top: 6.5rem;
-    right: 11rem;
-}
-
 #form-new-member-team .form__icon {
     right: 3%;
     margin-top: 0.5rem;

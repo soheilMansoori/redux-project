@@ -2,40 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./Infos.css";
+import TabMenu from "../../Components/TabMenu/TabMenu";
 
 export default function Infos() {
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper">
-        <ul className="content__tabs">
-          <li className="content__tab">
-            <Link to="/users" className="content__tab-link">
-              <span className="fa fa-user"></span>
-              کاربران
-            </Link>
-          </li>
-          <li className="content__tab">
-            <Link to="/infos" className="content__tab-link">
-              <span className="fa fa-book"></span>
-              اطلاعات
-            </Link>
-          </li>
-          <li className="content__tab">
-            <Link to="/courses" className="content__tab-link">
-              <span className="fa fa-store"></span>
-              دوره‌ها
-            </Link>
-          </li>
-
-          <li className="content__tab">
-            <Link to="/articles" className="content__tab-link">
-              <span className="fa fa-newspaper"></span>
-              وبلاگ
-            </Link>
-          </li>
-        </ul>
-        <div className="active"></div>
-
+        <TabMenu />
         <div className="information">
           <div id="accordion">
             <div className="card">
