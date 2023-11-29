@@ -1,16 +1,15 @@
 import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit'
+import apiRequests from '../../Axios/config';
 
 export const getUsersFromServer = createAsyncThunk(
-    'Users/getUsersFromServer',
+    "Users/getUsersFromServer",
     async (url) => {
-        console.log("url => ", url);
-        return fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                return data
-            })
-            .catch(error => console.log(error))
+        // console.log("url => ", url);
+        return apiRequests(url)
+            .then(response => {
+                // console.log(response);
+                return response.data
+            }).catch(error => console.log(error))
     }
 )
 
@@ -26,12 +25,13 @@ const slice = createSlice({
 
     extraReducers: builder => {
         builder.addCase(getUsersFromServer.fulfilled, (state, action) => {
-            console.log('state =>', state);
-            console.log('action =>', action);
+            // console.log('state =>', state);
+            // console.log('action =>', action);
+            return action.payload
         })
     }
 })
 
-console.log(slice);
+// console.log(slice);
 export const { getAllUsers } = slice.actions
 export default slice.reducer
