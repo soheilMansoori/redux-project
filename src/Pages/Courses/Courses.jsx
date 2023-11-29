@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CourseBox from "../../Components/CourseBox/CourseBox";
 import { Link } from "react-router-dom";
 import "./Courses.css";
 import TabMenu from "../../Components/TabMenu/TabMenu";
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCoursesFromServer } from "../../Redux/courses/courses";
 export default function Courses() {
+  const dispatch = useDispatch()
+  const courses = useSelector(store => store.courses)
+
+  useEffect(() => {
+    console.log(courses);
+    dispatch(getAllCoursesFromServer('/courses'))
+  }, [])
+
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper d-flex flex-column align-content-between">
         <TabMenu />
         <div className="products products-container">
           <div className="products__list products-wrapper">
-            <CourseBox />
-            <CourseBox />
+            {courses.length ? (
+              <>
+                {courses.map(course => (
+                  <CourseBox  {...course} key={course._id} />
+                ))}
+              </>
+            ) : (
+              <div className="alert alert-danger"> هیچ دوره ایی یافت نشد </div>
+            )}
           </div>
         </div>
 

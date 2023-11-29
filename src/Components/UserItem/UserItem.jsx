@@ -1,18 +1,18 @@
 import React from "react";
 
-export default function UserItem() {
+export default function UserItem({ firstname, lastname, email }) {
     return (
         <div className="uesrs__item">
             <div className="users__info">
                 <img
-                    src="../../img/admin/profile/banana.png"
+                    src="/"
                     alt="photo user"
                     className="users__img"
                 />
                 <div className="users__details">
-                    <p className="users__name my-0">سهیل منصوری</p>
+                    <p className="users__name my-0">{firstname} {lastname}</p>
                     <p lang="en" className="users__email">
-                        soheil@gmail.com
+                        {email}
                     </p>
                 </div>
             </div>

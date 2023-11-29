@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Users.css";
 import TabMenu from "../../Components/TabMenu/TabMenu";
+import { getUsersFromServer } from "../../Redux/users/users";
+import { useDispatch, useSelector } from 'react-redux'
+import UserItem from "../../Components/UserItem/UserItem";
+
 
 export default function Users() {
+  const dispatch = useDispatch()
+  const users = useSelector(store => store.users)
+  useEffect(() => {
+    dispatch(getUsersFromServer('/users'))
+  }, [])
+
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper">
@@ -28,28 +38,13 @@ export default function Users() {
 
           <div className="users__list-container">
             <div className="users__list users__list-wrapper">
-              <div className="uesrs__item">
-                <div className="users__info">
-                  <img
-                    src="../../img/admin/profile/banana.png"
-                    alt="photo user"
-                    className="users__img"
-                  />
-                  <div className="users__details">
-                    <p className="users__name my-0">سهیل منصوری</p>
-                    <p lang="en" className="users__email">
-                      soheil@gamil.com
-                    </p>
-                  </div>
-                </div>
-                <div className="users__btns">
-                  <button className="btn-custome btn-custome--gray">پیام ها</button>
-                  <button className="btn-custome btn-custome__blue">اطلاعات</button>
-                  <button className="btn-custome btn-custome__red">حذف</button>
-                </div>
-              </div>
+              {users.length && users.map(user => (
+                <UserItem {...user} key={user._id} />
+              ))}
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
