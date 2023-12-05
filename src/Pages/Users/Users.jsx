@@ -38,9 +38,13 @@ export default function Users() {
 
           <div className="users__list-container">
             <div className="users__list users__list-wrapper">
-              {users.length && users.map(user => (
-                <UserItem {...user} key={user._id} />
-              ))}
+              {users.length ? (
+                users.map(user => (
+                  <UserItem {...user} key={user._id} />
+                ))
+              ) : (
+                <div className="alert alert-danger">کاربری یافت نشد</div>
+              )}
 
             </div>
           </div>
