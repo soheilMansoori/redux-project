@@ -5,13 +5,26 @@ export const getUsersFromServer = createAsyncThunk(
     "Users/getUsersFromServer",
     async (url) => {
         // console.log("url => ", url);
-        return apiRequests(url)
+        return apiRequests.get(url)
             .then(response => {
                 // console.log(response);
                 return response.data
             }).catch(error => console.log(error))
     }
 )
+
+
+export const removeUserFromServer = createAsyncThunk(
+    'Users/removeUserFromServer',
+    async (url) => {
+        return apiRequests.delete(url)
+            .then(response => {
+                console.log('response =>', response);
+                return undefined
+            }).catch(error => console.log(error))
+    }
+)
+
 
 const slice = createSlice({
     name: 'Users',
@@ -29,6 +42,12 @@ const slice = createSlice({
             // console.log('action =>', action);
             return action.payload
         })
+
+        builder.addCase(removeUserFromServer.fulfilled, (state, action) => {
+            console.log('state =>', state);
+            console.log('action =>', action);
+        })
+
     }
 })
 
