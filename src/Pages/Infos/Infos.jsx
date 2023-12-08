@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 import "./Infos.css";
 import TabMenu from "../../Components/TabMenu/TabMenu";
+import { Formik } from "formik";
+import { addNewUser } from '../../Redux/users/users'
+import { useDispatch } from 'react-redux'
+
 
 export default function Infos() {
+  const dispatch = useDispatch()
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper">
@@ -23,161 +26,124 @@ export default function Infos() {
                 data-bs-parent="#accordion"
               >
                 <div className="card-body information-current-admin-wrapper-form p-4">
-                  <form action="#" className="form row mx-0">
-                    <div className="form__box-input col-6 px-2">
-                      <span className="fa fa-user form__icon"></span>
-                      <input
-                        type="text"
-                        name=""
-                        value=""
-                        id="firstname"
-                        placeholder="نام "
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="firstname" className="form__label my-0">
-                        نام
-                      </label>
-                    </div>
+                  <Formik
+                    initialValues={{
+                      firstname: '',
+                      lastname: '',
+                      username: '',
+                      email: '',
+                      city: '',
+                      age: ''
+                    }}
+                    onSubmit={(values) => {
+                      console.log('form values =>', values);
+                      dispatch(addNewUser(values))
+                    }}
+                  >
+                    {/* values === initialValues */}
+                    {({ values, handleChange, handleSubmit }) => (
+                      <form action="#" className="form row mx-0" onSubmit={handleSubmit}>
 
-                    <div className="form__box-input col-6 px-2">
-                      <span className="fa fa-users form__icon"></span>
-
-                      <input
-                        type="text"
-                        name=""
-                        value=""
-                        id="lastname"
-                        placeholder="نام خانوادگی"
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="lastname" className="form__label my-0">
-                        نام خانوادگی
-                      </label>
-                    </div>
-
-                    <div className="form__box-input col-6 px-2">
-                      <span className="fa fa-address-book form__icon"></span>
-
-                      <input
-                        lang="en"
-                        type="text"
-                        name=""
-                        value=""
-                        id="username"
-                        placeholder="نام کاربری"
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="username" className="form__label my-0">
-                        نام کاربری
-                      </label>
-                    </div>
-
-                    <div className="form__box-input col-6 px-2">
-                      <span className="fa fa-globe form__icon"></span>
-
-                      <input
-                        lang="en"
-                        type="email"
-                        name=""
-                        value=""
-                        id="email"
-                        placeholder="email "
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="email" className="form__label my-0" lang="en">
-                        email
-                      </label>
-                    </div>
-
-                    <div className="form__box-input col-4 px-2">
-                      <span className="fa fa-key form__icon"></span>
-
-                      <input
-                        type="password"
-                        name=""
-                        id="password"
-                        placeholder="رمز جاری"
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="password" className="form__label my-0">
-                        رمز جاری
-                      </label>
-                      <span className="fa fa-key form__icon"></span>
-                    </div>
-                    <div className="form__box-input col-4 px-2">
-                      <span className="fa fa-key form__icon"></span>
-
-                      <input
-                        type="password"
-                        name=""
-                        id="password"
-                        placeholder="رمز  جدید"
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="password" className="form__label my-0">
-                        رمز جدید
-                      </label>
-                      <span className="fa fa-key form__icon"></span>
-                    </div>
-                    <div className="form__box-input col-4 px-2">
-                      <input
-                        type="password"
-                        name=""
-                        id="password"
-                        placeholder="تکرار رمز"
-                        className="form-control form__input"
-                        required
-                      />
-                      <label for="password" className="form__label my-0">
-                        تکرار رمز
-                      </label>
-                      <span className="fa fa-key form__icon"></span>
-                    </div>
-
-                    <div className="change-profile-box px-0 d-flex gap-4 mb-4">
-                      <div className="change-profile-input-box">
-                        <img
-                          src="../../img/admin/profile/banana.png"
-                          className="change-profile-pic"
-                          alt=""
-                        />
-                        <label
-                          for="upload-profile-input"
-                          className="upload-profile-input-label"
-                        >
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-user form__icon"></span>
                           <input
-                            type="file"
-                            id="upload-profile-input"
-                            name=""
+                            type="text"
+                            name="firstname"
+                            value={values.firstname}
+                            onChange={handleChange}
+                            id="firstname"
+                            placeholder="نام"
+                            className="form-control form__input px-5"
+                            required
                           />
-                        </label>
-                      </div>
+                        </div>
 
-                      <div className="change-banner-input-box">
-                        <img
-                          src="../../img/admin/banner/banner.png"
-                          className="change-banner-pic"
-                          alt=""
-                        />
-                        <label
-                          for="upload-banner-input"
-                          className="upload-banner-input-label"
-                        >
-                          <input type="file" id="upload-banner-input" name="" />
-                        </label>
-                      </div>
-                    </div>
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-users form__icon"></span>
 
-                    <button className="btn-custome btn-custome__blue col-6 mb-3">
-                      اپدیت اطلاعات
-                    </button>
-                  </form>
+                          <input
+                            type="text"
+                            name="lastname"
+                            value={values.lastname}
+                            onChange={handleChange}
+                            id="lastname"
+                            placeholder="نام خانوادگی"
+                            className="form-control form__input px-5"
+                            required
+                          />
+                        </div>
+
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-address-book form__icon"></span>
+
+                          <input
+                            lang="en"
+                            type="text"
+                            name="username"
+                            value={values.username}
+                            onChange={handleChange}
+                            id="username"
+                            placeholder="نام کاربری"
+                            className="form-control form__input px-5"
+                            required
+                          />
+                        </div>
+
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-globe form__icon"></span>
+
+                          <input
+                            type="email"
+                            name="email"
+                            value={values.email}
+                            onChange={handleChange}
+                            placeholder="ایمیل"
+                            className="form-control form__input px-5"
+                            required
+                          />
+                        </div>
+
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-key form__icon"></span>
+
+                          <input
+                            type="text"
+                            name="city"
+                            value={values.city}
+                            onChange={handleChange}
+                            id="password"
+                            placeholder="شهر"
+                            className="form-control form__input px-5"
+                            required
+                          />
+                          <span className="fa fa-key form__icon"></span>
+                        </div>
+
+                        <div className="form__box-input col-6 px-2">
+                          <span className="fa fa-key form__icon"></span>
+
+                          <input
+                            type="password"
+                            name='age'
+                            value={values.age}
+                            onChange={handleChange}
+                            placeholder="سن"
+                            className="form-control form__input px-5"
+                            required
+                          />
+                          <span className="fa fa-key form__icon"></span>
+                        </div>
+
+
+                        <button type="submit" className="btn-custome btn-custome__blue col-6 my-3">
+                          ثبت نام
+                        </button>
+
+                      </form>
+
+                    )}
+                  </Formik>
+
                 </div>
               </div>
             </div>
@@ -234,6 +200,7 @@ export default function Infos() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

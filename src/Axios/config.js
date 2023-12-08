@@ -14,7 +14,7 @@ apiRequests.interceptors.request.use(
     },
 
     (error) => {
-        console.log("error => ", error);
+        // console.log("error => ", error);
         return Promise.reject(error);
     }
 );
@@ -26,7 +26,7 @@ apiRequests.interceptors.response.use(
         return response
     },
     (error) => {
-        console.log('error =>', error);
+        // console.log('error =>', error);
         return Promise.reject(error)
     }
 );
