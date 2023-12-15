@@ -2,15 +2,13 @@ import { createSlice, createAsyncThunk, } from '@reduxjs/toolkit'
 import apiRequests from '../../Axios/config';
 
 
-
-
 export const getUsersFromServer = createAsyncThunk(
     "Users/getUsersFromServer",
     async (url) => {
         // console.log("url => ", url);
         return apiRequests.get(url)
             .then(response => {
-                // console.log(response);
+                console.log(response);
                 return response.data
             }).catch(error => console.log(error))
     }
@@ -22,7 +20,7 @@ export const removeUserFromServer = createAsyncThunk(
     async (id) => {
         return apiRequests.delete(`/users/${id}`)
             .then(response => {
-                console.log('response =>', response);
+                // console.log('response =>', response);
                 return response.data
             }).catch(error => console.log(error))
     }
@@ -60,14 +58,16 @@ const slice = createSlice({
         })
 
         builder.addCase(removeUserFromServer.fulfilled, (state, action) => {
-            console.log('state =>', state);
-            console.log('action =>', action);
-            return
+            // console.log('state =>', state);
+            // console.log('action =>', action);
+            const newUsers = state.filter(user => user._id !== action.payload.id)
+            return newUsers
         })
 
         builder.addCase(addNewUser.fulfilled, (state, action) => {
             console.log('state =>', state);
             console.log('action =>', action);
+            return state
         })
 
     }

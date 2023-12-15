@@ -100,3 +100,7 @@
 }
 
 /* end dark mode */
+
+.show-modal {
+  display: block !important;
+}

@@ -10,5 +10,4 @@ const store = configureStore({
         articles: articlesReducer,
     }
 })
-
 export default store

@@ -93,3 +93,9 @@
 .dark .information .card-header a {
     color: var(--secondry);
 }
+
+.input-invalid {
+    color: red;
+    font-size: 13px;
+    font-weight: bold;
+}

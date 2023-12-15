@@ -7,7 +7,7 @@ export default function Sidebar() {
                 <div className="card position-relative text-center">
                     <img
                         className="card-img-top sidebar__img-banner"
-                        src="/"
+                        src="img/admin/banner/banner.png"
                         alt="banner admin photo"
                     />
                     <div className="card-body">
@@ -48,7 +48,7 @@ export default function Sidebar() {
 
                     <div className="sidebar__profile">
                         <img
-                            src="/"
+                            src="img/admin/profile/banana.png"
                             alt="admin photo"
                             className="sidebar__img-profile"
                         />

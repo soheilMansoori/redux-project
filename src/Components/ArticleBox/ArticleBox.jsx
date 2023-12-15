@@ -1,10 +1,47 @@
 import React from "react";
+import { useDispatch } from 'react-redux'
+import swal from 'sweetalert'
+import { removeArticlesFromServer } from '../../Redux/articles/articles'
 
-export default function ArticleBox({ title, desc, category, views }) {
+export default function ArticleBox({ getAllArticles, _id, title, desc, category, views }) {
+    const dispatch = useDispatch()
+    const removeArticle = (id) => {
+        // console.log(id);
+        swal({
+            title: 'ایا از حذف مقاله مطمعن هستید',
+            icon: 'warning',
+            buttons: ['نه', 'اره']
+        }).then(result => {
+            // console.log(result);
+            if (result) {
+                dispatch(removeArticlesFromServer(id))
+                getAllArticles()
+                swal({
+                    title: 'مقاله مورد نظر با موفیقت حذف شد',
+                    icon: 'success',
+                    buttons: 'اوک'
+                })
+            }
+        })
+    }
+
+
+    const imgs = [ 
+        'img/articeles/articele-1.jpg',
+        'img/articeles/articele-2.jpg',
+        'img/articeles/articele-3.jpg',
+        'img/articeles/articele-4.jpg',
+        'img/articeles/articele-5.jpg',
+        'img/articeles/articele-6.jpg',
+    ]
+
+    let randomImgIndex = Math.round(Math.random() * (imgs.length - 1))
+    let randomImg = imgs[randomImgIndex]
+
     return (
         <div className="articles__item">
             <img
-                src="/"
+                src={randomImg}
                 alt="product-img-1"
                 className="articles__img"
             />
@@ -33,8 +70,7 @@ export default function ArticleBox({ title, desc, category, views }) {
                         </div>
                     </div>
                     <div className="articles__btns">
-                        <button className="op-btn btn btn-danger btn-lg">حذف</button>
-                        <button className="op-btn btn btn-info btn-lg">ویرایش</button>
+                        <button className="op-btn btn btn-danger btn-lg" onClick={() => removeArticle(_id)}>حذف</button>
                     </div>
                 </div>
             </div>

@@ -2,12 +2,25 @@ import React from "react";
 import "./Infos.css";
 import TabMenu from "../../Components/TabMenu/TabMenu";
 import { Formik } from "formik";
-import { addNewUser } from '../../Redux/users/users'
+import { addNewUser, getUsersFromServer } from '../../Redux/users/users'
 import { useDispatch } from 'react-redux'
-
+import swal from 'sweetalert'
+import infosValidation from './infosValidation'
 
 export default function Infos() {
   const dispatch = useDispatch()
+
+  const addNewUserHandler = (userInfo) => {
+    dispatch(addNewUser(userInfo))
+    dispatch(getUsersFromServer('/users'))
+    swal({
+      title: "کاربر مورد نظر ایجاد شد",
+      icon: 'success',
+      buttons: 'اوک'
+    })
+    console.log(userInfo);
+  }
+
   return (
     <div className="col-8 content px-0">
       <div className="content__wrapper">
@@ -33,48 +46,54 @@ export default function Infos() {
                       username: '',
                       email: '',
                       city: '',
-                      age: ''
+                      age: '',
                     }}
-                    onSubmit={(values) => {
+                    onSubmit={(values, { setSubmitting }) => {
                       console.log('form values =>', values);
-                      dispatch(addNewUser(values))
+                      addNewUserHandler(values)
+                      setTimeout(() => {
+                        setSubmitting(false)
+                      }, 5000)
                     }}
+                    validationSchema={infosValidation}
                   >
                     {/* values === initialValues */}
-                    {({ values, handleChange, handleSubmit }) => (
-                      <form action="#" className="form row mx-0" onSubmit={handleSubmit}>
-
+                    {({ values, errors, touched, handleChange, handleSubmit, handleBlur, isSubmitting }) => (
+                      <form className="form row mx-0" onSubmit={handleSubmit}>
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-user form__icon"></span>
+                          <span className="fa fa-user form__icon" />
                           <input
                             type="text"
                             name="firstname"
                             value={values.firstname}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             id="firstname"
                             placeholder="نام"
                             className="form-control form__input px-5"
-                            required
                           />
+                          {errors.firstname && touched.firstname && <span className="input-invalid">{errors.firstname}</span>}
                         </div>
 
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-users form__icon"></span>
+                          <span className="fa fa-users form__icon" />
 
                           <input
                             type="text"
                             name="lastname"
                             value={values.lastname}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             id="lastname"
                             placeholder="نام خانوادگی"
                             className="form-control form__input px-5"
-                            required
                           />
+                          {errors.lastname && touched.lastname && <span className="input-invalid">{errors.lastname}</span>}
+
                         </div>
 
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-address-book form__icon"></span>
+                          <span className="fa fa-address-book form__icon" />
 
                           <input
                             lang="en"
@@ -82,61 +101,65 @@ export default function Infos() {
                             name="username"
                             value={values.username}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             id="username"
                             placeholder="نام کاربری"
                             className="form-control form__input px-5"
-                            required
                           />
+                          {errors.username && touched.username && <span className="input-invalid">{errors.username}</span>}
                         </div>
 
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-globe form__icon"></span>
+                          <span className="fa fa-globe form__icon" />
 
                           <input
                             type="email"
                             name="email"
                             value={values.email}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             placeholder="ایمیل"
                             className="form-control form__input px-5"
-                            required
                           />
+                          {errors.email && touched.email && <span className="input-invalid">{errors.email}</span>}
                         </div>
 
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-key form__icon"></span>
-
+                          <span className="fa fa-key form__icon" />
                           <input
                             type="text"
                             name="city"
                             value={values.city}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             id="password"
                             placeholder="شهر"
                             className="form-control form__input px-5"
-                            required
                           />
-                          <span className="fa fa-key form__icon"></span>
+                          {errors.city && touched.city && <span className="input-invalid">{errors.city}</span>}
                         </div>
 
                         <div className="form__box-input col-6 px-2">
-                          <span className="fa fa-key form__icon"></span>
+                          <span className="fa fa-key form__icon" />
 
                           <input
-                            type="password"
+                            type="text"
                             name='age'
                             value={values.age}
                             onChange={handleChange}
+                            onBlur={handleBlur}
                             placeholder="سن"
                             className="form-control form__input px-5"
-                            required
                           />
-                          <span className="fa fa-key form__icon"></span>
+                          {errors.age && touched.age && <span className="input-invalid">{errors.age}</span>}
                         </div>
 
 
-                        <button type="submit" className="btn-custome btn-custome__blue col-6 my-3">
-                          ثبت نام
+                        <button type="submit"
+                          className="btn-custome btn-custome__blue col-6 my-3"
+                          disabled={isSubmitting}
+                        >
+                          {isSubmitting ? ('... در حال ارسال') : ('ثبت نام')}
                         </button>
 
                       </form>

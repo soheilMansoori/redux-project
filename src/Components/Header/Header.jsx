@@ -5,7 +5,7 @@ export default function Header() {
       <header className="header col-10 col-md-12 mx-auto">
         <div className="header__info">
           <img
-            src="/"
+            src="img/admin/profile/banana.png"
             alt="admin photo"
             className="header__img"
           />
